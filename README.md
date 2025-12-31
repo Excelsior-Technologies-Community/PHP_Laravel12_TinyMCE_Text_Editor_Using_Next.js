@@ -427,7 +427,7 @@ export default function Edit() {
 
       <label>Description</label>
 
-      {/* 🔥 key={id} = NO refresh while typing */}
+      {/* key={id} = NO refresh while typing */}
       <TinyEditor
         key={id}
         value={description}
@@ -476,7 +476,7 @@ export default function Edit() {
   );
 }
 ```
-# Now also createtinymce.js file
+# Now also create tinymce.js file
 ```php
 import { useEffect, useRef } from "react";
 
