@@ -8,17 +8,19 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('post_revisions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('post_id')->constrained()->cascadeOnDelete();
             $table->string('title');
-            $table->longText('description')->nullable();
-            $table->string('status')->default('draft');
+            $table->longText('content');
             $table->timestamps();
+
+            $table->index('post_id');
         });
     }
 
     public function down(): void
     {
-        Schema::dropIfExists('posts');
+        Schema::dropIfExists('post_revisions');
     }
 };
