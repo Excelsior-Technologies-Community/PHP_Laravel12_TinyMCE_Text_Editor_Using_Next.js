@@ -6,23 +6,24 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->string('status')->default('draft')->after('description');
+            $table->string('slug')->nullable()->unique()->after('title');
+            $table->string('meta_title')->nullable()->after('slug');
+            $table->text('meta_description')->nullable()->after('meta_title');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->dropColumn('status');
+            $table->dropUnique(['slug']);
+            $table->dropColumn([
+                'slug',
+                'meta_title',
+                'meta_description',
+            ]);
         });
     }
 };
